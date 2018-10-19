@@ -1,4 +1,5 @@
 const model = require('../models/books')
+const joinModel = require('../models/authors_books')
 module.exports = {
     // GET ALL
     getAll(req, res, next) {
@@ -13,7 +14,7 @@ module.exports = {
     },
     // GET ONE
     getOne(req, res, next) {
-        return model.getOne(+req.params.id)
+        return joinModel.getOne(+req.params.id)
             .then(book => res.status(200).json(book))
             .catch(err => {
                 const error = new Error('Failed to get book')
