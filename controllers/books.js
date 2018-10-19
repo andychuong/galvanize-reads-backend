@@ -62,6 +62,7 @@ module.exports = {
         return model.update(+req.params.id, req.body)
             .then(book => {
                 if (req.body.authors) {
+                    req.book = book
                     return joinModel.delete(book.id)
                 } else {
                     return res.status(200).json(book)
@@ -69,7 +70,7 @@ module.exports = {
             })
             .then(() => {
                 return Promise.all(req.body.authors.map(author => {
-                    return joinModel.create({ author_id: author.id, book_id: book.id })
+                    return joinModel.create({ author_id: author.id, book_id: req.book.id })
                 }))
             })
             .then(() => {
