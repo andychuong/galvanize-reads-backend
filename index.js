@@ -1,12 +1,15 @@
 require('dotenv').config()
 const express = require(`express`)
 const bodyParser = require('body-parser')
-
+const authorsRouter = require('../routes/authors')
+const booksRouter = require('../routes/books')
 const app = express()
 
 const port = process.env.PORT || 3000
 
 app.use(bodyParser.json())
+app.use('/authors', authorsRouter)
+app.use('/books', booksRouter)
 
 //handle 404
 app.use((req, res, next) => {
