@@ -3,10 +3,11 @@ const express = require(`express`)
 const bodyParser = require('body-parser')
 const authorsRouter = require('./routes/authors')
 const booksRouter = require('./routes/books')
+const cors = require('cors')
 const app = express()
 
 const port = process.env.PORT || 3000
-
+app.use(cors)
 app.use(bodyParser.json())
 app.use('/authors', authorsRouter)
 app.use('/books', booksRouter)

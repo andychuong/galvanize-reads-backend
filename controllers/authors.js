@@ -46,7 +46,7 @@ function getOneAuthor(req, res, next) {
 
 function updateAuthor(req, res, next) {
   return model.updateAuthor(req.params.id, req.body)
-    .then(author => res.status(200).send(author))
+    .then(author => res.status(200).send({data: author}))
     .catch(err => {
       const error = new Error('Failed to update author')
       error.status = 503
@@ -57,7 +57,7 @@ function updateAuthor(req, res, next) {
 
 function deleteAuthor(req, res, next) {
   return model.deleteAuthor(req.params.id)
-    .then(author => res.status(200).send(author))
+    .then(author => res.status(200).send({data:author}))
     .catch(err => {
       const error = new Error('Failed to delete author')
       error.status = 503
