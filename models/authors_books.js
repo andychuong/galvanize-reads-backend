@@ -5,7 +5,7 @@ const knex = require('../db/knex')
 const model = {
     getAuthors(bookId) {
         return knex('authors_books')
-            .select('author_id')
+            .select('*')
             .where('book_id', bookId)
             .then(authorIds => {
                 console.log('authorIds', authorIds)
