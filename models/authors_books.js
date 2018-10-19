@@ -5,11 +5,12 @@ const knex = require('../db/knex')
 const model = {
     getAuthors(bookId) {
         return knex('authors_books')
-            .select('*')
+            .select('author_id')
+            .where('book_id', bookId)
             .then(authorIds => {
                 console.log('authorIds', authorIds)
-                return Promise.all(authorIds.map(id => {
-                    return authorsModel.getOneAuthor(id)
+                return Promise.all(authorIds.map(record => {
+                    return authorsModel.getOneAuthor(record[author_id])
                 }))
             })
             .then(authors => {
