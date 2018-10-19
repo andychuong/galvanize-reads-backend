@@ -1,8 +1,8 @@
 require('dotenv').config()
 const express = require(`express`)
 const bodyParser = require('body-parser')
-const authorsRouter = require('../routes/authors')
-const booksRouter = require('../routes/books')
+const authorsRouter = require('./routes/authors')
+const booksRouter = require('./routes/books')
 const app = express()
 
 const port = process.env.PORT || 3000

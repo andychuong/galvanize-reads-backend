@@ -4,9 +4,9 @@ exports.up = function (knex, Promise) {
         table.increments()
         table.string('title').notNullable()
         table.string('genre').notNullable()
-        table.string('description').notNullable()
+        table.text('description').notNullable()
         table.string('coverUrl').notNullable()
-        table.timestamps(true, true).notNullable()
+        table.timestamps(true, true)
     })
 }
 

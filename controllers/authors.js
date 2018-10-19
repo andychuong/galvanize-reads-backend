@@ -2,63 +2,68 @@
 const model = require('../models/authors')
 
 function addAuthor(req, res, next) {
-  const result = model.addAuthor(req.body)
-  if (result.errors) {
-    return next({
-      status: 400,
-      message: `Could not create new author`,
-      errors: result.errors
+  return model.addAuthor(req.body)
+    .catch(errors => {
+      return next({
+        status: 400,
+        message: `Could not create new author`,
+        errors: errors
+      })
     })
-  }
-  res.status(201).json({
-    data: result
-  })
+    .then(data => {
+      res.status(201).json({
+        data: data
+      })
+    })
 }
 
 function getAll(req, res, next) {
-  const data = model.getAllAuthors()
-  res.status(200).json({
-    data: data
-  })
+  return model.getAll()
+    .catch(error=>{
+      console.log(error)
+    })
+    .then(data => {
+      res.status(200).json({
+        data: data
+      })
+    })
 }
 
 function getOneAuthor(req, res, next) {
-  const data = model.getOneAuthor(req.params.id)
-  if (data.error) {
-    return next({
-      status: 404,
-      message: data.error
+  return model.getOneAuthor(req.params.id)
+    .catch(error => {
+      return next({
+        status: 404,
+        message: error
+      })
     })
-  }
-  res.status(200).json({
-    data: data.author
-  })
+    .then(data => {
+      res.status(200).json({
+        data: data
+      })
+    })
 }
 
 function updateAuthor(req, res, next) {
-  const data = model.updateAuthor(req.params.id, req.body)
-  if (data.error) {
-    return next({
-      status: data.error.status,
-      message: data.error.message
+  return model.updateAuthor(req.params.id, req.body)
+    .then(author => res.status(200).send(author))
+    .catch(err => {
+      const error = new Error('Failed to update author')
+      error.status = 503
+      error.caught = err
+      return next(error)
     })
-  }
-  res.status(200).json({
-    data: data.author
-  })
 }
 
 function deleteAuthor(req, res, next) {
-  const data = model.deleteAuthor(req.params.id)
-  if (data.error) {
-    return next({
-      status: 404,
-      message: data.error
+  return model.deleteAuthor(req.params.id)
+    .then(author => res.status(200).send(author))
+    .catch(err => {
+      const error = new Error('Failed to delete author')
+      error.status = 503
+      error.caught = err
+      return next(error)
     })
-  }
-  res.status(204).json({
-    data: data.author
-  })
 }
 
 module.exports = {
