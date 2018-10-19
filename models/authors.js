@@ -119,5 +119,4 @@ module.exports = {
   getOneAuthor,
   updateAuthor,
   deleteAuthor,
-
 }
