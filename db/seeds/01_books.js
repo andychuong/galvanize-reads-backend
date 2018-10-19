@@ -9,5 +9,9 @@ exports.seed = function(knex, Promise) {
         {id: 2, title: 'Harry Potter and the Sorcerer\'s Stone', genre: 'fantasy', coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/515W3XN03YL._SX316_BO1,204,203,200_.jpg', description: `Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents' mysterious deaths.`},
         {id: 3, title: `Harry Potter and the Goblet of Fire`, genre: `fantasy`, coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/41AF6KHRGML._SX329_BO1,204,203,200_.jpg', description: 'Harry Potter and the Goblet of Fire is a fantasy book written by British author J. K. Rowling and the fourth novel in the Harry Potter series.'}
       ]);
-    });
+    })
+    .then( () => {
+      return knex.raw(
+        `SELECT setval('books_id_seq', (SELECT MAX(id) FROM books));`)
+    })
 };
