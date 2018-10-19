@@ -10,7 +10,7 @@ const model = {
             .then(authorIds => {
                 console.log('authorIds', authorIds)
                 return Promise.all(authorIds.map(record => {
-                    return authorsModel.getOneAuthor(record[author_id])
+                    return authorsModel.getOneAuthor(record["author_id"])
                 }))
             })
             .then(authors => {
