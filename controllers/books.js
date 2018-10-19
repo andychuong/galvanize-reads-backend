@@ -25,7 +25,7 @@ module.exports = {
     },
     // CREATE
     create(req, res, next) {
-        return model.create(req.params.id)
+        return model.create(req.body)
             .then(book => res.status(201).json(book))
             .catch(err => {
                 const error = new Error('Failed to create book')
