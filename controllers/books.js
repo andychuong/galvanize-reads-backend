@@ -74,8 +74,8 @@ module.exports = {
                 }))
             })
             .then(() => {
-                book.authors = req.body.authors
-                return res.status(201).json(book)
+                req.book.authors = req.body.authors
+                return res.status(201).json(req.book)
             })
             .catch(err => {
                 const error = new Error('Failed to update book')
