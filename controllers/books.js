@@ -72,6 +72,10 @@ module.exports = {
                     return joinModel.create({ author_id: author.id, book_id: book.id })
                 }))
             })
+            .then(() => {
+                book.authors = req.body.authors
+                return res.status(201).json(book)
+            })
             .catch(err => {
                 const error = new Error('Failed to update book')
                 error.status = 503
