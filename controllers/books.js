@@ -4,7 +4,12 @@ module.exports = {
     // GET ALL
     getAll(req, res, next) {
         return model.getAll()
-            .then(books => res.status(200).json(books))
+            .then(books => {
+                return Promise.all(books.map(book => {
+                    return joinModel.getAuthors(book.id)
+                }))
+            })
+            .then(joinedBooks => res.status(200).json(joinedBooks))
             .catch(err => {
                 const error = new Error('Failed to get books')
                 error.status = 503
