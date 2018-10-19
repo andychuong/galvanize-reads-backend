@@ -43,6 +43,12 @@ module.exports = {
                         book.authors = req.body.authors
                         res.status(201).json(book)
                     })
+                    .catch(err => {
+                        const error = new Error('Failed to create book')
+                        error.status = 503
+                        error.caught = err
+                        return next(error)
+                    })
             })
             .catch(err => {
                 const error = new Error('Failed to create book')
