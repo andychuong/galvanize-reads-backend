@@ -3,9 +3,9 @@ const router = express.Router()
 const controller = require('../controllers/books')
 
 router.get('/', controller.getAll)
-router.get('/:id', controller.verifyId, controller.getOne)
+router.get('/:id', controller.getOne)
 router.post('/', controller.create)
-router.put('/:id', controller.verifyId, controller.update)
-router.delete('/:id', controller.verifyId, controller.delete)
+router.put('/:id', controller.update)
+router.delete('/:id', controller.delete)
 
 module.exports = router
