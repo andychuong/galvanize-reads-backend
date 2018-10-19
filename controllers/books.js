@@ -70,7 +70,7 @@ module.exports = {
             })
             .then(() => {
                 return Promise.all(req.body.authors.map(author => {
-                    return joinModel.create({ author_id: author.id, book_id: req.book.id })
+                    return joinModel.create({ author_id: author, book_id: req.book.id })
                 }))
             })
             .then(() => {
