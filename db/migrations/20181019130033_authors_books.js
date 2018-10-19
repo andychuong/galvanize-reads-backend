@@ -2,8 +2,8 @@ exports.up = function (knex, Promise) {
     return knex.schema.createTable('authors_books', table => {
         table.integer('author_id').notNullable()
         table.integer('book_id').notNullable()
-        table.foreign('author_id').references('authors.id')
-        table.foreign('book_id').references('books.id')
+        table.foreign('author_id').onDelete('CASCADE').references('authors.id')
+        table.foreign('book_id').onDelete('CASCADE').references('books.id')
     })
 }
 
