@@ -52,7 +52,7 @@ function parseBody(body) {
         .then(columns => Object.keys(columns))
         .then(fieldNames => {
             console.log(fieldNames)
-            for (let field in fieldNames) {
+            for (let field of fieldNames) {
                 if (body[field]) {
                     fields[field] = body[field]
                 }

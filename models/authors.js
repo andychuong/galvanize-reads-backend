@@ -46,12 +46,11 @@ function parseBody(body) {
     // Never update ID or hard-code ID on creation, remove from body if it exists
     delete body.id
     let fields = {}
-    console.log('author', body)
     // Get column names from schema, only handle field names that exist in the DB
     return knex('authors').columnInfo()
         .then(columns => Object.keys(columns))
         .then(fieldNames => {
-            for (let field in fieldNames) {
+            for (let field of fieldNames) {
                 if (body[field]) {
                     fields[field] = body[field]
                 }
