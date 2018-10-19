@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 
 //handle all errors
 app.use((err, req, res, next) => {
+    console.error(err)
     res.status(err.status || 500)
     res.send(err)
 })
