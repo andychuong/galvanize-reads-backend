@@ -6,7 +6,6 @@ const model = {
     getAuthors(bookId) {
         return knex('authors_books')
             .select('*')
-            .where('book_id', bookId)
             .then(authorIds => {
                 console.log('authorIds', authorIds)
                 return Promise.all(authorIds.map(id => {
