@@ -25,6 +25,14 @@ const model = {
             .then(() => knex('authors_books')
                 .insert(entry))
             .catch(e => Promise.reject(e))
+    },
+    delete(bookId) {
+        return knex('authors_books')
+            .where('book_id', bookId)
+            .del()
+            .returning('*')
+            .then(entries => entries)
+            .catch(() => Promise.reject(e))
     }
 }
 

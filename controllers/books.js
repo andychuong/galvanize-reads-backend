@@ -44,7 +44,7 @@ module.exports = {
                         res.status(201).json(book)
                     })
                     .catch(err => {
-                        const error = new Error('Failed to create book')
+                        const error = new Error('Failed to associate book with author')
                         error.status = 503
                         error.caught = err
                         return next(error)
@@ -60,7 +60,18 @@ module.exports = {
     // UPDATE
     update(req, res, next) {
         return model.update(+req.params.id, req.body)
-            .then(book => res.status(200).json(book))
+            .then(book => {
+                if (req.body.authors) {
+                    return joinModel.delete(book.id)
+                } else {
+                    return res.status(200).json(book)
+                }
+            })
+            .then(() => {
+                Promise.all(req.body.authors.map(author => {
+                    return joinModel.create({ author_id: author.id, book_id: book.id })
+                }))
+            })
             .catch(err => {
                 const error = new Error('Failed to update book')
                 error.status = 503
