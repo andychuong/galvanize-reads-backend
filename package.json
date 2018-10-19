@@ -1,0 +1,30 @@
+{
+    "name": "galvanize-reads-backend",
+    "version": "0.1.0",
+    "description": "DB, web server for galvanize-reads",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andychuong/galvanize-reads-backend.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/andychuong/galvanize-reads-backend/issues"
+    },
+    "homepage": "https://github.com/andychuong/galvanize-reads-backend#readme",
+    "dependencies": {
+        "dotenv": "^6.1.0",
+        "express": "^4.16.4",
+        "knex": "^0.15.2",
+        "pg": "^7.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.4"
+    }
+}
