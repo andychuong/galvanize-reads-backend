@@ -51,11 +51,13 @@ function parseBody(body) {
     return knex('books').columnInfo()
         .then(columns => Object.keys(columns))
         .then(fieldNames => {
+            console.log(fieldNames)
             for (let field in fieldNames) {
                 if (body[field]) {
                     fields[field] = body[field]
                 }
             }
+            console.log(fields)
             return fields
         })
 }
