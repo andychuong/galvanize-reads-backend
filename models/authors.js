@@ -110,9 +110,6 @@ function deleteAuthor(id) {
   return response
 }
 
-
-
-
 module.exports = {
   addAuthor,
   getAllAuthors,
