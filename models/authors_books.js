@@ -7,11 +7,13 @@ const model = {
             .select('author_id')
             .where('book_id', bookId)
             .then(authorIds => {
+                console.log('authorIds', authorIds)
                 return Promise.all(authorIds.map(id => {
                     return authorsModel.getOneAuthor(id)
                 }))
             })
             .then(authors => {
+                console.log('authors', authors)
                 return booksModel.getOne(bookId)
                     .then(book => {
                         book.authors = authors
