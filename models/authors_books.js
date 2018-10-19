@@ -1,5 +1,6 @@
 const authorsModel = require('../models/authors')
 const booksModel = require('../models/books')
+const knex = require('../db/knex')
 
 const model = {
     getAuthors(bookId) {
