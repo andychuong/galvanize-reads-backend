@@ -36,7 +36,7 @@ module.exports = {
     },
     // UPDATE
     update(req, res, next) {
-        return model.update(req.body)
+        return model.update(+req.params.id, req.body)
             .then(book => res.status(200).send(book))
             .catch(err => {
                 const error = new Error('Failed to update book')
@@ -47,7 +47,7 @@ module.exports = {
     },
     // DELETE
     delete(req, res, next) {
-        return model.delete(req.body)
+        return model.delete(+req.params.id)
             .then(book => res.status(200).send(book))
             .catch(err => {
                 const error = new Error('Failed to delete book')
