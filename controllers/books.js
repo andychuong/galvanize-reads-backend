@@ -32,7 +32,18 @@ module.exports = {
     // CREATE
     create(req, res, next) {
         return model.create(req.body)
-            .then(book => res.status(201).json(book))
+            .then(book => {
+                const inserts = req.body.authors.map(author => {
+                    return { author_id: author.id, book_id: book.id }
+                })
+                Promise.all(inserts.map(entry => {
+                    joinModel.create(entry)
+                }))
+                    .then(() => {
+                        book.authors = req.body.authors
+                        res.status(201).json(book)
+                    })
+            })
             .catch(err => {
                 const error = new Error('Failed to create book')
                 error.status = 503

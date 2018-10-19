@@ -8,19 +8,23 @@ const model = {
             .select('author_id')
             .where('book_id', bookId)
             .then(authorIds => {
-                console.log('authorIds', authorIds)
                 return Promise.all(authorIds.map(record => {
                     return authorsModel.getOneAuthor(record["author_id"])
                 }))
             })
             .then(authors => {
-                console.log('authors', authors)
                 return booksModel.getOne(bookId)
                     .then(book => {
                         book.authors = authors
                         return book
                     })
             })
+    },
+    create(entry) {
+        return authorsModel.getOneAuthor(entry.author_id)
+            .then(() => knex('authors_books')
+                .insert(entry))
+            .catch(e => Promise.reject(e))
     }
 }
 
