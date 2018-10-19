@@ -1,0 +1,59 @@
+const model = require('../models/books')
+module.exports = {
+    // GET ALL
+    getAll(req, res, next) {
+        return model.getAll()
+            .then(books => res.status(200).send(books))
+            .catch(err => {
+                const error = new Error('Failed to get books')
+                error.status = 503
+                error.caught = err
+                return next(error)
+            })
+    },
+    // GET ONE
+    getOne(req, res, next) {
+        return model.getOne(+req.params.id)
+            .then(book => res.status(200).send(book))
+            .catch(err => {
+                const error = new Error('Failed to get book')
+                error.status = 404
+                error.caught = err
+                return next(error)
+            })
+
+    },
+    // CREATE
+    create(req, res, next) {
+        return model.create(+req.params.id)
+            .then(book => res.status(201).send(book))
+            .catch(err => {
+                const error = new Error('Failed to create book')
+                error.status = 503
+                error.caught = err
+                return next(error)
+            })
+    },
+    // UPDATE
+    update(req, res, next) {
+        return model.update(req.body)
+            .then(book => res.status(200).send(book))
+            .catch(err => {
+                const error = new Error('Failed to update book')
+                error.status = 503
+                error.caught = err
+                return next(error)
+            })
+    },
+    // DELETE
+    delete(req, res, next) {
+        return model.delete(req.body)
+            .then(book => res.status(200).send(book))
+            .catch(err => {
+                const error = new Error('Failed to delete book')
+                error.status = 503
+                error.caught = err
+                return next(error)
+            })
+    }
+}
