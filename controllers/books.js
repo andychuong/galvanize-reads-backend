@@ -55,5 +55,14 @@ module.exports = {
                 error.caught = err
                 return next(error)
             })
+    },
+    // Helper Middleware 
+    verifyId(req, res, next) {
+        let { id } = +req.params.id
+        if (!id || typeof id !== 'number') {
+            const error = new Error('Bad ID')
+            error.status = 400
+            return next(error)
+        }
     }
 }
