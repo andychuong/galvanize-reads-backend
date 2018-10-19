@@ -34,7 +34,7 @@ module.exports = {
         return model.create(req.body)
             .then(book => {
                 const inserts = req.body.authors.map(author => {
-                    return { author_id: author.id, book_id: book.id }
+                    return { author_id: author, book_id: book.id }
                 })
                 Promise.all(inserts.map(entry => {
                     joinModel.create(entry)
