@@ -14,7 +14,7 @@ module.exports = {
     },
     // GET ONE
     getOne(req, res, next) {
-        return joinModel.getOne(+req.params.id)
+        return joinModel.getAuthors(+req.params.id)
             .then(book => res.status(200).json(book))
             .catch(err => {
                 const error = new Error('Failed to get book')

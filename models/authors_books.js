@@ -4,7 +4,7 @@ const booksModel = require('../models/books')
 const model = {
     getAuthors(bookId) {
         return knex('authors_books')
-            .select('author_id as a_id')
+            .select('author_id')
             .where('book_id', bookId)
             .then(authorIds => {
                 return Promise.all(authorIds.map(id => {
