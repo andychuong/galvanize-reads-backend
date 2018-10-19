@@ -47,7 +47,7 @@ function parseBody(body) {
     delete body.id
     let fields = {}
     // Get column names from schema, only handle field names that exist in the DB
-    return knex.table('books').columnInfo()
+    return knex('books').columnInfo()
         .then(columns => Object.keys(columns))
         .then(fieldNames => {
             for (let field in fieldNames) {
